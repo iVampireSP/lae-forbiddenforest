@@ -21,7 +21,9 @@ class PostController extends Controller
         }
 
         // 根据 published_at 排序
-        $post->orderBy('published_at', 'desc');
+        $post = $post->orderBy('published_at', 'desc');
+
+        $post = $post->with('blog.user');
 
         return $this->success($post->paginate());
     }

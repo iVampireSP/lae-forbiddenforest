@@ -34,6 +34,9 @@ class BlogPostController extends Controller
     {
         $ua = $request->header('User-Agent');
 
-        return $this->success($blog->publishComment($blog_post_id, $request->input('content'), $ua));
+        $response = $blog->publishComment($blog_post_id, $request->input('content'), $ua);
+        unset($response['author_ip']);
+
+        return $this->created($response);
     }
 }
