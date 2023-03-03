@@ -75,7 +75,7 @@ class BlogController extends Controller
         }
 
         $blog->update($request->only([
-            'url', 'username', 'password',
+            'url', 'username', 'password', 'tag'
         ]));
 
         return $this->updated($blog);
