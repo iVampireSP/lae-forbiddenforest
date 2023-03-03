@@ -5,15 +5,22 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Post;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index(): JsonResponse
+    public function index(Request $request): JsonResponse
     {
-        return $this->success(Post::paginate());
+        $post = new Post();
+
+        if ($request->filled('search')) {
+            $post = $post->search($request->input('search'));
+        }
+
+        return $this->success($post->paginate());
     }
 
     /**
