@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh_CN" data-bs-theme="dark">
+<html lang="zh_CN" data-bs-theme="auto">
 
 <head>
     <meta charset="utf-8">
