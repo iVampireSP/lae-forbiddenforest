@@ -16,12 +16,12 @@ class PostController extends Controller
     {
         $post = new Post();
 
-        // 根据 published_at 排序
-        $post = $post->orderBy('published_at', 'desc');
-
         if ($request->filled('search')) {
             $post = $post->search($request->input('search'));
         }
+
+        // 根据 published_at 排序
+        $post->orderBy('published_at', 'desc');
 
         return $this->success($post->paginate());
     }
