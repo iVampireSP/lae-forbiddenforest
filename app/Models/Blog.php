@@ -21,6 +21,7 @@ class Blog extends Model
         'username',
         'password',
         'status',
+        'tag',
     ];
 
     public $hidden = [

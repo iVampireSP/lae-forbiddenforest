@@ -33,6 +33,7 @@ class BlogController extends Controller
             'url' => 'required|url',
             'username' => 'required',
             'password' => 'required',
+            'tag' => 'nullable|string'
         ]);
 
         // 检查博客
@@ -47,6 +48,7 @@ class BlogController extends Controller
             'url',
             'username',
             'password',
+            'tag'
         ]));
 
         return $this->created($blog);

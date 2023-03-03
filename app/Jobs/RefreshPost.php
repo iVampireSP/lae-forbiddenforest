@@ -34,7 +34,7 @@ class RefreshPost implements ShouldQueue
     public function handle(): void
     {
         // 获取 Tag
-        $tag = $this->blog->getTag(config('blog.posts.slug'));
+        $tag = $this->blog->getTag($this->blog->tag);
 
         if (! $tag) {
             return;

@@ -27,12 +27,16 @@ return new class extends Migration
             $table->string('username')->nullable();
             $table->string('password')->nullable();
 
+            // tag
+            $table->string('tag')->nullable();
+
             // 状态
             $table->enum('status', ['up', 'down'])->default('up');
 
             // user id
             $table->unsignedBigInteger('user_id')->index();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+
 
             $table->timestamps();
         });
