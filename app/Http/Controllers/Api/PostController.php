@@ -14,7 +14,7 @@ class PostController extends Controller
      */
     public function index(Request $request): JsonResponse
     {
-        $post = new Post();
+        $post = Post::with('blog.user');
 
         if ($request->filled('search')) {
             $post = $post->search($request->input('search'));
@@ -23,7 +23,7 @@ class PostController extends Controller
         // 根据 published_at 排序
         $post = $post->orderBy('published_at', 'desc');
 
-        $post = $post->with('blog.user');
+
 
         return $this->success($post->paginate());
     }
