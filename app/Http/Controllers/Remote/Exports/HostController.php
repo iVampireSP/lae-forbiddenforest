@@ -8,7 +8,6 @@ use ivampiresp\Cocoa\Models\Host;
 
 class HostController extends Controller
 {
-
     public function index(Request $request)
     {
         // 模块之间调用最好也遵循 RESTful。并且 莱云 会在每个 Request 和 Header(X-Module) 中加上发起调用的 module_id。
@@ -20,8 +19,8 @@ class HostController extends Controller
         // 从 Header 中获取发起调用的 module_id
         // dd($request->header('X-Module'));
 
-
         $hosts = Host::thisUser($request->user_id)->get();
+
         return $this->success($hosts);
     }
 }

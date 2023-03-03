@@ -10,8 +10,6 @@ class AppServiceProvider extends ServiceProvider
 {
     /**
      * Register any application services.
-     *
-     * @return void
      */
     public function register(): void
     {
@@ -20,11 +18,17 @@ class AppServiceProvider extends ServiceProvider
 
     /**
      * Bootstrap any application services.
-     *
-     * @return void
      */
     public function boot(): void
     {
         Paginator::useBootstrapFive();
+
+        Http::macro('wp', function ($url, $username = null, $password = null) {
+            return Http::baseUrl($url)
+                ->withBasicAuth($username, $password)
+                ->withHeaders([
+                    'User-Agent' => 'LAE Forbidden Forest (https://dash.laecloud.com)',
+                ]);
+        });
     }
 }

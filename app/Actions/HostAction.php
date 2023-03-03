@@ -12,11 +12,9 @@ use Illuminate\Support\Facades\Log;
  * 我们推荐将它推到队列中执行，这样可以极大的提高性能。
  *
  * 但是需要结合你的业务来决定是否需要推到队列中执行，否则会在开发时造成不必要的麻烦。
- *
  */
 class HostAction extends Action
 {
-
     /**
      * @throws HostActionException
      */
@@ -39,13 +37,12 @@ class HostAction extends Action
 
         // 或者，你可以将它推送到队列中，让它在后台执行。
 
-
         /* 结束创建服务器的逻辑 */
 
         /* 你可能还需要计算价格，或者将它放置到 Host 中，当 create 或者 update 时，触发价格更新 */
         // 这里，我们手动指定价格
 
-        $host->price = "100";
+        $host->price = '100';
 
         // 这一步非常重要，在创建成功后，你必须将它设置为 running。
         $host->status = 'running';
@@ -55,7 +52,6 @@ class HostAction extends Action
 
         // 最后，我们标记一下任务完成。
         $this->updateTask($task, '服务器创建成功。', 'success');
-
 
         return $host;
     }
@@ -147,7 +143,7 @@ class HostAction extends Action
 
         // 价格计算机会在主机创建和更新时被调用。
         // 你可以自定义价格计算器，但是请切记，使用 bcmath 函数来计算价格，价格必须是字符串类型。
-        $price = "5";
+        $price = '5';
 
         /* 以下都是例子，请根据自己的需要来。 */
         // // 加法

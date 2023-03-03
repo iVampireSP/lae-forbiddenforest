@@ -36,6 +36,7 @@ class Action
         $task_json = $task->json();
         if ($task->failed()) {
             Log::error($task_json);
+
             return false;
         } else {
             return $task_json['id'] ?? false;
@@ -64,7 +65,6 @@ class Action
             Log::error($resp_json);
             throw new HostActionException($resp_json['message'] ?? '创建云主机失败');
         } else {
-
             $host_id = $resp_json['id'];
             $data['host_id'] = $host_id;
 
@@ -89,10 +89,11 @@ class Action
         }
 
         // 完成任务
-        $resp = $this->http->patch('/tasks/' . $task_id, $append);
+        $resp = $this->http->patch('/tasks/'.$task_id, $append);
 
         if ($resp->failed()) {
             Log::error($resp->body());
+
             return false;
         } else {
             return true;
@@ -107,10 +108,11 @@ class Action
             $host_id = $host;
         }
 
-        $resp = $this->http->patch('/hosts/' . $host_id, $data);
+        $resp = $this->http->patch('/hosts/'.$host_id, $data);
 
         if ($resp->failed()) {
             Log::error($resp->body());
+
             return false;
         } else {
             return $resp->json();
@@ -125,10 +127,11 @@ class Action
             $host_id = $host;
         }
 
-        $resp = $this->http->delete('/hosts/' . $host_id);
+        $resp = $this->http->delete('/hosts/'.$host_id);
 
         if ($resp->failed()) {
             Log::error($resp->body());
+
             return false;
         } else {
             return true;

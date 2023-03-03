@@ -13,7 +13,9 @@ class HostJob implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     public array $requests;
+
     public string $action;
+
     public mixed $host;
 
     /**
@@ -30,12 +32,9 @@ class HostJob implements ShouldQueue
 
     /**
      * Execute the job.
-     *
-     * @return void
      */
     public function handle(): void
     {
         // 这里就是异步队列了，请按照你的业务来写。
-
     }
 }

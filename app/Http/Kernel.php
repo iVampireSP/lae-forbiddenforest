@@ -8,6 +8,7 @@ use App\Http\Middleware\CheckModuleIsIpManager;
 use App\Http\Middleware\EncryptCookies;
 use App\Http\Middleware\PreventRequestsDuringMaintenance;
 use App\Http\Middleware\RedirectIfAuthenticated;
+use App\Http\Middleware\ResourceOwner;
 use App\Http\Middleware\TrimStrings;
 use App\Http\Middleware\TrustProxies;
 use App\Http\Middleware\VerifyCsrfToken;
@@ -71,8 +72,8 @@ class Kernel extends HttpKernel
 
         'remote' => [
             SubstituteBindings::class,
-            RemoteRequest::class
-        ]
+            RemoteRequest::class,
+        ],
     ];
 
     /**
@@ -94,6 +95,7 @@ class Kernel extends HttpKernel
         'throttle' => ThrottleRequests::class,
         'verified' => EnsureEmailIsVerified::class,
         'check_module_is_ip_manager' => CheckModuleIsIpManager::class,
-        'api.token' => ApiToken::class
+        'api.token' => ApiToken::class,
+        'resource_owner' => ResourceOwner::class,
     ];
 }

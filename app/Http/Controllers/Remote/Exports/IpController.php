@@ -7,7 +7,6 @@ use ivampiresp\Cocoa\Models\Ip;
 
 class IpController extends Controller
 {
-
     public function __construct()
     {
         $this->middleware('check_module_is_ip_manager');
@@ -23,8 +22,6 @@ class IpController extends Controller
 
         return $this->success($ip);
     }
-
-
 
     /**
      * 移除绑定的 IP 地址，比如给指定网卡断网，然后移除。

@@ -13,15 +13,12 @@ class ApiToken
     /**
      * Handle an incoming request.
      *
-     * @param Request                                       $request
      * @param Closure(Request): (Response|RedirectResponse) $next
-     *
-     * @return JsonResponse|RedirectResponse|Response
      */
     public function handle(Request $request, Closure $next): Response|JsonResponse|RedirectResponse
     {
         // if bearer token is not set
-        if (!$request->bearerToken() || $request->bearerToken() !== config('app.api_token')) {
+        if (! $request->bearerToken() || $request->bearerToken() !== config('app.api_token')) {
             return response()->json([
                 'message' => 'Unauthorized',
             ], 401);
