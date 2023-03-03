@@ -33,12 +33,20 @@ class RefreshPost implements ShouldQueue
      */
     public function handle(): void
     {
-        // 刷新所有文章
+        // 获取 Tag
+        $tag = $this->blog->getTag(config('blog.posts.slug'));
 
+        if (! $tag) {
+            return;
+        }
+
+        // 刷新所有文章
         $posts = $this->blog->getPosts([
             'page' => $this->page,
             'limit' => 100,
-            'slug' => config('blog.posts.slug'),
+            'tags' => [
+                $tag[0]['id'],
+            ],
         ]);
 
         if (! $posts) {

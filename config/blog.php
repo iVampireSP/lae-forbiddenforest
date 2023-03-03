@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'posts' => [
-        'slug' => '禁林',
+    'tags' => [
+        'slug' => 'forbidden-forest',
     ],
 ];

@@ -146,7 +146,16 @@ class Blog extends Model
 
     public function getPost($blog_post_id): array
     {
-        $response = $this->http()->get('/wp-json/wp/v2/posts/' . $blog_post_id);
+        $response = $this->http()->get('/wp-json/wp/v2/posts/'.$blog_post_id);
+
+        return $response->json();
+    }
+
+    public function getTag($slug): array
+    {
+        $response = $this->http()->get('/wp-json/wp/v2/tags', [
+            'slug' => $slug,
+        ]);
 
         return $response->json();
     }
@@ -168,13 +177,13 @@ class Blog extends Model
     public function publishComment($blog_post_id, $content, $ua = 'LAE-ForbiddenForest/1.0')
     {
         $user = auth('api')->user();
-        
+
         $response = $this->http()->post('/wp-json/wp/v2/comments', [
             'post' => $blog_post_id,
             'author_name' => $user->name,
             'author_email' => $user->email,
             'content' => $content,
-            'author_user_agent' => $ua
+            'author_user_agent' => $ua,
         ]);
 
         return $response->json();

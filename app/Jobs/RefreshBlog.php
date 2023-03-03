@@ -30,10 +30,12 @@ class RefreshBlog implements ShouldQueue
      */
     public function handle(): void
     {
+        // 删除上次同步时间超过 1 天的文章
         if (! $this->blog) {
             Blog::chunk(100, function ($blog) {
                 $blog->each(function (Blog $blog) {
                     self::dispatch($blog);
+                    $blog->posts()->where('synced_at', '<', now()->subDay())->delete();
                 });
             });
 

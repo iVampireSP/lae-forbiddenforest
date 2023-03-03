@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
-use App\Models\Post;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -34,6 +33,7 @@ class BlogPostController extends Controller
     public function storeComment(Request $request, Blog $blog, $blog_post_id): JsonResponse
     {
         $ua = $request->header('User-Agent');
+
         return $this->success($blog->publishComment($blog_post_id, $request->input('content'), $ua));
     }
 }
